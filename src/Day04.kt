@@ -14,17 +14,17 @@ fun main() {
     println(part2(input))
 }
 
-fun List<String>.splitByLine(): List<List<String>> = map { line ->
+private fun List<String>.splitByLine(): List<List<String>> = map { line ->
     line.split(',')
 }
 
-fun List<List<String>>.mapToPairOfRanges(): List<Pair<IntRange, IntRange>> = map { elfGroup ->
+private fun List<List<String>>.mapToPairOfRanges(): List<Pair<IntRange, IntRange>> = map { elfGroup ->
     val elfARange = elfGroup[0].split('-')
     val elfBRange = elfGroup[1].split('-')
     (elfARange[0].toInt()..elfARange[1].toInt()) to (elfBRange[0].toInt()..elfBRange[1].toInt())
 }
 
-fun List<Pair<IntRange, IntRange>>.sumOfPairsThatOverlapEntirely() = sumOf { (elfARange, elfBRange) ->
+private fun List<Pair<IntRange, IntRange>>.sumOfPairsThatOverlapEntirely() = sumOf { (elfARange, elfBRange) ->
     val addition: Int =
         if (elfARange.contains(elfBRange.first) && elfARange.contains(elfBRange.last) || elfBRange.contains(
                 elfARange.first
@@ -33,7 +33,7 @@ fun List<Pair<IntRange, IntRange>>.sumOfPairsThatOverlapEntirely() = sumOf { (el
     addition
 }
 
-fun List<Pair<IntRange, IntRange>>.sumOfPairsThatOverlap() = sumOf { (elfARange, elfBRange) ->
+private fun List<Pair<IntRange, IntRange>>.sumOfPairsThatOverlap() = sumOf { (elfARange, elfBRange) ->
     val addition: Int = if(elfARange.any { elfBRange.contains(it) } || elfBRange.any { elfARange.contains(it) }) 1 else 0
     addition
 }
